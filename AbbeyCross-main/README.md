@@ -1,0 +1,1 @@
+To run this program type "python app.py" in the terminal

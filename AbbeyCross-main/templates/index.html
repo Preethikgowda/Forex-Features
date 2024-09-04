@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily FX and TradingView</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+        }
+        .news-section, .widget-section {
+            width: 50%;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .news-section {
+            background-color: #000;
+        }
+        .widget-section {
+            background-color: #202020;
+        }
+        h1 {
+            background-color: #004d00;
+            text-align: center;
+            color: #fff;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 15px;
+        }
+        a {
+            text-decoration: none;
+            color: #00ff00;
+        }
+        p {
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- News Section -->
+        <div class="news-section">
+            <h1>Daily FX News</h1>
+            {% if news_items %}
+            <ul>
+                {% for item in news_items %}
+                <li>
+                    <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                    <p>{{ item.published }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No news available at the moment.</p>
+            {% endif %}
+        </div>
+        
+        <!-- TradingView Widget Section -->
+        <div class="widget-section">
+            <!-- TradingView Widget 1 -->
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <div class="tradingview-widget-copyright">
+                    <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+                        <span class="blue-text">Track all markets on TradingView</span>
+                    </a>
+                </div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+                {
+                    "symbols": [
+                        ["FX_IDC:USDINR|1D"],
+                        ["FX:EURUSD|1D"],
+                        ["FX:GBPUSD|1D"]
+                    ],
+                    "chartOnly": false,
+                    "width": "100%",
+                    "height": "300",
+                    "locale": "en",
+                    "colorTheme": "dark",
+                    "autosize": true
+                }
+                </script>
+            </div>
+            <!-- TradingView Widget 2 -->
+            <div class="tradingview-widget-container" style="margin-top: 20px;">
+                <div class="tradingview-widget-container__widget"></div>
+                <div class="tradingview-widget-copyright">
+                    <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+                        <span class="blue-text">Track all markets on TradingView</span>
+                    </a>
+                </div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                {
+                    "interval": "1m",
+                    "width": "100%",
+                    "height": "300",
+                    "symbol": "FX_IDC:USDINR",
+                    "locale": "en",
+                    "colorTheme": "dark"
+                }
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
